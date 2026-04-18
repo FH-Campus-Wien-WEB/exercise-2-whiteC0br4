@@ -1,41 +1,157 @@
 @import url(base.css);
 
-h1 {
-  font-size: 200%;
-  margin: 8px 0px;
+/* Style für die Seite */
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
 }
 
-img {
+/* Titel */
+h2 {
+  font-weight: 700;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+/* Movie-Artikel */
+.movie {
+  background-color: white;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  padding: 25px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-article {
-  background-color: lightgray;
-  border-radius: 16px;
-  padding: 16px;
-  margin: 2vw;
+.movie:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
-span {
-  margin-right: 4px;
+/* Meta-Informationen (Jahr, Bewertung, etc.) */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+  color: #7f8c8d;
+  flex-wrap: wrap;
 }
 
-.genre {
-  padding: 4px 8px;
-  border: solid black 1px;
-  border-radius: 6px;
-  background-color: darkgray;
+.meta span {
+  margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+.rating {
   font-weight: bold;
+  color: #e67e22;
 }
 
-input {
-  width: 100%;
+/* Bild */
+.poster {
+  float: left;
+  margin: 0 20px 10px 0;
+  max-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-select {
-  width: 100%;
+.poster:hover {
+  transform: scale(1.02);
 }
 
-textarea {
-  width: 100%;
+/* Plot */
+.movie p {
+  margin-bottom: 15px;
+  text-align: justify;
+  color: #555;
+}
+
+/* weitere Infos */
+.info {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.info li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ecf0f1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info li:last-child {
+  border-bottom: none;
+}
+
+.info strong {
+  color: #2c3e50;
+  min-width: 120px;
+}
+
+/* Genre-Tags */
+.genre {
+  background-color: #e0f7fa;
+  color: #00838f;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  display: inline-block;
+  font-size: 0.85em;
+  border: 1px solid #b2ebf2;
+}
+
+/* kleinere Bildschirme */
+@media (max-width: 768px) {
+  .movie {
+    padding: 15px;
+  }
+
+.poster {
+  float: none;
+  display: block;
+  margin: 0 auto 15px;
+  max-width: 100%;
+}
+
+.meta {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info li {
+  display: block;
+}
+}
+
+.edit-button {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: rgba(0, 255, 255, 0.37);
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: background-color 0.15s;
+}
+
+.edit-button:hover {
+  background-color: rgb(0, 255, 255);
 }

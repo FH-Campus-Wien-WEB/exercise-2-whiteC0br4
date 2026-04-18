@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Movie</title>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="edit.css" />
+  </head>
+  <body>
+    <h1>Edit Movie</h1>
+    <form id="edit-form">
+      <input type="hidden" id="imdbID" />
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" />
+      </div>
+      <div>
+        <label for="released">Released:</label>
+        <input type="date" id="released" />
+      </div>
+      <div>
+        <label for="runtime">Runtime (minutes):</label>
+        <input type="number" id="runtime" />
+      </div>
+      <div>
+        <label for="genres">Genres (comma-separated):</label>
+        <input type="text" id="genres" />
+      </div>
+      <div>
+        <label for="directors">Directors (comma-separated):</label>
+        <input type="text" id="directors" />
+      </div>
+      <div>
+        <label for="writers">Writers (comma-separated):</label>
+        <input type="text" id="writers" />
+      </div>
+      <div>
+        <label for="actors">Actors (comma-separated):</label>
+        <input type="text" id="actors" />
+      </div>
+      <div>
+        <label for="plot">Plot:</label>
+        <textarea id="plot"></textarea>
+      </div>
+      <div>
+        <label for="poster">Poster URL:</label>
+        <input type="text" id="poster" />
+      </div>
+      <div>
+        <label for="metascore">Metascore:</label>
+        <input type="number" id="metascore" />
+      </div>
+      <div>
+        <label for="imdbRating">IMDb Rating:</label>
+        <input type="number" step="0.1" id="imdbRating" />
+      </div>
+      <button type="submit">Save</button>
+    </form>
+    <script src="edit.js"></script>
+  </body>
+</html>
