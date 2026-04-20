@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const imdbID = urlParams.get('imdbID');
   const form = document.getElementById('edit-form');
 
+  // Lade den Film
   fetch(`/movies/${imdbID}`)
     .then(response => {
       if (!response.ok) {
@@ -16,7 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('title').value = movie.Title;
       document.getElementById('released').value = movie.Released;
       document.getElementById('runtime').value = movie.Runtime;
-      document.getElementById('genres').value = movie.Genres.join(', ');
+
+      // Setze die ausgewählten Genres
+      const genreSelect = document.getElementById('genres');
+      for (let i = 0; i < genreSelect.options.length; i++) {
+        const option = genreSelect.options[i];
+        option.selected = movie.Genres.includes(option.value);
+      }
+
       document.getElementById('directors').value = movie.Directors.join(', ');
       document.getElementById('writers').value = movie.Writers.join(', ');
       document.getElementById('actors').value = movie.Actors.join(', ');
@@ -30,15 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Error loading movie data');
     });
 
+  // Formular absenden
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
+    // Sammle die ausgewählten Genres
+    const genreSelect = document.getElementById('genres');
+    const selectedGenres = [];
+    for (let i = 0; i < genreSelect.options.length; i++) {
+      const option = genreSelect.options[i];
+      if (option.selected) {
+        selectedGenres.push(option.value);
+      }
+    }
+
     const updatedMovie = {
-      imdbID: document.getElementById('imdbID').value,
       Title: document.getElementById('title').value,
       Released: document.getElementById('released').value,
       Runtime: parseInt(document.getElementById('runtime').value),
-      Genres: document.getElementById('genres').value.split(',').map(genre => genre.trim()),
+      Genres: selectedGenres,
       Directors: document.getElementById('directors').value.split(',').map(director => director.trim()),
       Writers: document.getElementById('writers').value.split(',').map(writer => writer.trim()),
       Actors: document.getElementById('actors').value.split(',').map(actor => actor.trim()),
