@@ -13,12 +13,12 @@ app.use(express.static(path.join(__dirname, 'files')));
 
 // Endpoint: Alle Filme abrufen
 app.get('/movies', function (req, res) {
-  res.json(movieModel);
+  res.json(movieModel.getAll());
 });
 
 // Endpoint: Einzelnen Film abrufen
 app.get('/movies/:imdbID', function (req, res) {
-  const movie = movieModel.find(m => m.imdbID === req.params.imdbID);
+  const movie = movieModel.getById(req.params.imdbID);
   if (!movie) {
     return res.sendStatus(404);
   }
@@ -27,18 +27,10 @@ app.get('/movies/:imdbID', function (req, res) {
 
 // Endpoint: Film aktualisieren
 app.put('/movies/:imdbID', function (req, res) {
-  const movieIndex = movieModel.findIndex(m => m.imdbID === req.params.imdbID);
-  if (movieIndex === -1) {
+  const updatedMovie = movieModel.update(req.params.imdbID, req.body);
+  if (!updatedMovie) {
     return res.sendStatus(404);
   }
-
-  const updatedMovie = {
-    ...movieModel[movieIndex],
-    ...req.body,
-    imdbID: req.params.imdbID
-  };
-
-  movieModel[movieIndex] = updatedMovie;
   res.json(updatedMovie);
 });
 

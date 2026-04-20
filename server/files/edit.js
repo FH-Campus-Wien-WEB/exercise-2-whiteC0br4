@@ -4,16 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('edit-form');
   const cancelButton = document.getElementById('cancel-button');
 
+  if (!imdbID) {
+    alert('No movie ID provided in URL');
+    return;
+  }
+
   // Lade den Film
   fetch(`/movies/${imdbID}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`Network response was not ok, status: ${response.status}`);
       }
       return response.json();
     })
     .then(movie => {
-      document.getElementById('imdbID').value = movie.imdbID;
+      document.getElementById('imdbID').value = imdbID;
       document.getElementById('title').value = movie.Title;
       document.getElementById('released').value = movie.Released;
       document.getElementById('runtime').value = movie.Runtime;
@@ -35,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error loading movie data');
+      alert(`Error loading movie data: ${error.message}`);
     });
 
   // Event-Listener für den Cancel-Button
@@ -58,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const updatedMovie = {
-      imdbID: document.getElementById('imdbID').value,
       Title: document.getElementById('title').value,
       Released: document.getElementById('released').value,
       Runtime: parseInt(document.getElementById('runtime').value),
@@ -81,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`Network response was not ok, status: ${response.status}`);
       }
       return response.json();
     })
@@ -90,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error saving movie data');
+      alert(`Error saving movie data: ${error.message}`);
     });
   });
 });
