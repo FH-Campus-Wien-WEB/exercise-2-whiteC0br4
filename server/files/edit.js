@@ -1,8 +1,8 @@
-// edit.js
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const imdbID = urlParams.get('imdbID');
   const form = document.getElementById('edit-form');
+  const cancelButton = document.getElementById('cancel-button');
 
   // Lade den Film
   fetch(`/movies/${imdbID}`)
@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Error loading movie data');
     });
 
+  // Event-Listener für den Cancel-Button
+  cancelButton.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+
   // Formular absenden
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -53,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const updatedMovie = {
+      imdbID: document.getElementById('imdbID').value,
       Title: document.getElementById('title').value,
       Released: document.getElementById('released').value,
       Runtime: parseInt(document.getElementById('runtime').value),
